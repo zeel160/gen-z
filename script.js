@@ -131,9 +131,9 @@ const genZReplies = [
 ];
 
 
-// Utility to preserve punctuation & capitalization
+
 function replaceSmart(text, dictionary) {
-  // Sort keys by length (longest first) to match phrases first
+  
   const sortedKeys = Object.keys(dictionary).sort((a, b) => b.length - a.length);
   let result = text;
  
