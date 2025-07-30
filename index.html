@@ -62,7 +62,7 @@
     #outputText {
       font-size: 16px; min-height: 60px; overflow-wrap: break-word; white-space: pre-wrap;
       opacity: 0; animation: fadeIn 0.5s ease forwards;
-      font-family: 'Comic Sans MS', cursive, sans-serif; color: #000;
+      font-family: 'Comic Sans MS',sans-serif; color: #000;
     }
     body.dark-mode #outputText { color: #ddd; }
     #outputText strong { font-weight: 700; }
@@ -265,7 +265,7 @@ Message: "${inputText}"`;
       } else {
         alert(`Error: ${response.error}`);
         document.getElementById("outputText").textContent = "Oops, something broke! 😅";
-      }
+      }z
     }
     async function genZReply() {
       const inputText = document.getElementById("inputText").value.trim();
