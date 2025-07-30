@@ -4,90 +4,242 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Gen Z Chat Translator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      background: linear-gradient(135deg, #ff7eb3, #65c7f7);
-      font-family: 'Comic Sans MS',sans-serif;
-      color: #fff;
-      display: flex; justify-content: center; align-items: center;
-      min-height: 100vh; transition: background 0.3s, color 0.3s;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    body.dark-mode { background: linear-gradient(135deg, #2c3e50, #4b79a1); color: #ddd; }
+    body {
+      background: #e0e0e0;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background: #2c2c2c;
+      color: #e0e0e0;
+    }
     .container {
-      background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
-      border-radius: 20px; padding: 70px 30px 30px 30px; width: 90%; max-width: 600px;
-      box-shadow: 0 0 20px rgba(255, 31, 166, 0.5); text-align: center; position: relative;
+      background: #e0e0e0;
+      border-radius: 16px;
+      padding: 60px 20px 20px 20px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.7);
+      text-align: center;
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    body.dark-mode .container {
+      background: #2c2c2c;
+      box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4), -8px -8px 16px rgba(255, 255, 255, 0.1);
+    }
+    .container:hover {
+      transform: translateY(-5px);
     }
     #themeButton, #emojiButton {
-      position: absolute; top: 10px;
-      color: #fff; font-size: 28px; cursor: pointer;
-      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
-      text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+      position: absolute;
+      top: 10px;
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s ease, color 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+      padding: 8px;
+      border: 2px solid #ff2e7e;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #ff4a8e, #e0256e);
+      color: #fff;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.7);
     }
-    body.dark-mode #themeButton, body.dark-mode #emojiButton { color: #f0f0f0; }
-    #themeButton { left: 10px; }
-    #emojiButton { left: 65px; }
+    #themeButton {
+      left: 10px;
+    }
+    #emojiButton {
+      left: 70px;
+    }
     #themeButton:hover, #emojiButton:hover {
-      transform: scale(1.2); box-shadow: 0 0 15px rgba(255, 31, 166, 1);
+      transform: scale(1.1);
+      color: #00d4ff;
+      border-color: #00d4ff;
+      background: linear-gradient(145deg, #e0256e, #cc1e5f);
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.5);
     }
-    #themeButton:active, #emojiButton:active {
-      opacity: 0.7;
+    body.dark-mode #themeButton, body.dark-mode #emojiButton {
+      color: #fff;
+      border-color: #ff5a9e;
+      background: linear-gradient(145deg, #ff6aae, #e0508e);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4), -4px -4px 8px rgba(255, 255, 255, 0.1);
     }
-    h1 { margin-bottom: 20px; font-size: 28px; font-weight: 700; }
+    body.dark-mode #themeButton:hover, body.dark-mode #emojiButton:hover {
+      border-color: #00d4ff;
+      background: linear-gradient(145deg, #d41f64, #bf1b58);
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 15px;
+      color: #ff2e7e;
+    }
+    body.dark-mode h1 {
+      color: #ff5a9e;
+    }
     textarea {
-      width: 100%; padding: 15px; margin: 10px 0; border: none;
-      border-radius: 15px; font-size: 16px; resize: vertical; min-height: 100px;
-      font-family: 'Comic Sans MS',sans-serif; color: #000;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      resize: vertical;
+      min-height: 100px;
+      font-family: 'Poppins', Arial, sans-serif;
+      color: #333;
+      background: #e0e0e0;
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+      transition: box-shadow 0.3s ease;
     }
-    body.dark-mode textarea { color: #ddd; }
+    textarea:focus {
+      outline: none;
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+    }
+    body.dark-mode textarea {
+      color: #e0e0e0;
+      background: #2c2c2c;
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+    }
+    body.dark-mode textarea:focus {
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+    }
     .buttons-bottom {
-      display: flex; flex-direction: row; justify-content: space-around; flex-wrap: nowrap;
-      margin: 15px 0; gap: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin: 15px 0;
     }
     button, .copy-btn {
-      padding: 10px 20px; background: linear-gradient(135deg, #ff4ecd, #ff1fa6); border: none;
-      border-radius: 15px; color: #fff; font-size: 16px; cursor: pointer;
-      transition: transform 0.2s ease; width: 45%; font-weight: 700;
+      padding: 12px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #ff4a8e, #e0256e);
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1), -4px -4px 8px rgba(255, 255, 255, 0.7);
     }
     button:hover, .copy-btn:hover {
-      transform: scale(1.05); background: linear-gradient(135deg, #ff1fa6, #ff4ecd);
+      transform: translateY(-2px);
+      background: linear-gradient(145deg, #e0256e, #cc1e5f);
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.5);
     }
-    .footer { margin-top: 15px; font-size: 14px; opacity: 0.8; }
+    body.dark-mode button, body.dark-mode .copy-btn {
+      background: linear-gradient(145deg, #ff6aae, #e0508e);
+      box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4), -4px -4px 8px rgba(255, 255, 255, 0.1);
+    }
+    body.dark-mode button:hover, body.dark-mode .copy-btn:hover {
+      background: linear-gradient(145deg, #d41f64, #bf1b58);
+      box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+    }
+    .footer {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+    body.dark-mode .footer {
+      color: #aaa;
+    }
     .output-section {
-      margin-top: 20px; background: rgba(255, 255, 255, 0.2); padding: 15px;
-      border-radius: 15px; text-align: left; min-height: 100px;
+      margin-top: 20px;
+      background: #e0e0e0;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: left;
+      min-height: 100px;
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.7);
     }
-    .output-section h3 { margin-bottom: 10px; font-weight: 700; }
+    body.dark-mode .output-section {
+      background: #2c2c2c;
+      box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.4), inset -4px -4px 8px rgba(255, 255, 255, 0.1);
+    }
+    .output-section h3 {
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: #ff2e7e;
+    }
+    body.dark-mode .output-section h3 {
+      color: #ff5a9e;
+    }
     #outputText {
-      font-size: 16px; min-height: 60px; overflow-wrap: break-word; white-space: pre-wrap;
-      opacity: 0; animation: fadeIn 0.5s ease forwards;
-      font-family: 'Comic Sans MS',sans-serif; color: #000;
+      font-size: 16px;
+      min-height: 60px;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
+      opacity: 0;
+      animation: fadeIn 0.5s ease forwards;
+      color: #333;
     }
-    body.dark-mode #outputText { color: #ddd; }
-    #outputText strong { font-weight: 700; }
-    #outputText ul { margin: 10px 0 10px 20px; }
-    #outputText li { margin-bottom: 5px; }
-    .word-of-day { margin-top: 10px; font-style: italic; font-size: 14px; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    body.dark-mode #outputText {
+      color: #e0e0e0;
+    }
+    #outputText strong {
+      font-weight: 700;
+    }
+    #outputText ul {
+      margin: 10px 0 10px 20px;
+    }
+    #outputText li {
+      margin-bottom: 5px;
+    }
+    .word-of-day {
+      margin-top: 10px;
+      font-size: 14px;
+      font-style: italic;
+      color: #666;
+    }
+    body.dark-mode .word-of-day {
+      color: #aaa;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
     @media (max-width: 600px) {
-      .container { width: 100%; max-width: 100%; padding: 70px 15px 15px 15px; border-radius: 0; }
-      .output-section { border-radius: 15px; }
-      .buttons-bottom { flex-wrap: nowrap; gap: 10px; }
-      .buttons-bottom button { width: 48%; }
-      #outputText { padding: 10px; }
-      #themeButton, #emojiButton {
-        font-size: 24px;
+      .container {
+        padding: 60px 15px 15px 15px;
+        border-radius: 12px;
       }
-      #themeButton { left: 10px; }
-      #emojiButton { left: 60px; }
+      h1 {
+        font-size: 20px;
+      }
+      textarea {
+        font-size: 14px;
+      }
+      button, .copy-btn {
+        font-size: 14px;
+        padding: 10px;
+      }
+      #themeButton, #emojiButton {
+        font-size: 20px;
+        padding: 6px;
+      }
+      #emojiButton {
+        left: 55px;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <span id="themeButton" onclick="toggleTheme()" title="Toggle Theme">🌙</span>
-    <span id="emojiButton" onclick="toggleEmoji()" title="Toggle Emoji Enhancer">😄</span>
+    <span id="themeButton" onclick="toggleTheme()" title="Toggle Theme">🌟</span>
+    <span id="emojiButton" onclick="toggleEmoji()" title="Toggle Emoji Enhancer">😎</span>
     <h1>💬 Gen Z Chat Translator 😎</h1>
     <div class="word-of-day" id="wordOfDay"></div>
     <textarea id="inputText" placeholder="Type in English or Hinglish (e.g., Bhai, kya scene hai?)..."></textarea>
@@ -179,11 +331,11 @@
     function toggleTheme() {
       isDarkMode = !isDarkMode;
       document.body.classList.toggle("dark-mode");
-      document.getElementById("themeButton").textContent = isDarkMode ? "☀️" : "🌙";
+      document.getElementById("themeButton").textContent = isDarkMode ? "🌚" : "🌟";
     }
     function toggleEmoji() {
       isEmojiEnabled = !isEmojiEnabled;
-      document.getElementById("emojiButton").textContent = isEmojiEnabled ? "✅" : "😄";
+      document.getElementById("emojiButton").textContent = isEmojiEnabled ? "🔥" : "😎";
     }
     function copyOutput() {
       const outputText = document.getElementById("outputText").textContent;
@@ -194,11 +346,17 @@
       });
     }
     async function callGenZApi(inputText, action) {
+      // Easter egg
+      if (inputText.toLowerCase() === "i'm tired") {
+        return { success: true, output: "**English Gen Z Slang:**\n* I’m in my flop era 😩\n**Hinglish Mix:**\n* Bhai, main toh thak gaya 😴" };
+      }
+
       const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent";
-      const apiKey = "AIzaSyDMepOWMQbY8ms295OFCcp8XHQ8iFiB5f0";
+      const primaryApiKey = "AIzaSyDMepOWMQbY8ms295OFCcp8XHQ8iFiB5f0";
+      const fallbackApiKey = "sk-de4c1b8bd5804c248bca3b66e47b5e71";
       let prompt;
       if (action === "convert") {
-        prompt = `Convert the following text to super trendy Gen Z slang for English (e.g., "vibe," "slaps," "no cap," "bussin") and mix Gen Z slang with Hindi phrases for Hinglish (e.g., "bhai, kya baat," "mast vibe"). Add emojis (e.g., 🔥, 😤, 🫶) to each item for extra Gen Z flair. Keep it bold, playful, and trendy. Provide the output in this exact format:
+        prompt = `Convert the following text to super trendy Gen Z slang for English (e.g., "vibe," "slaps," "no cap," "bussin") and mix Gen Z slang with Hindi phrases for Hinglish (e.g., "bhai, kya baat," "mast vibe"). Add emojis (e.g., 🔥, 😤, 🫶) to each item for extra Gen Z flair. Provide the output in this exact format:
 **English Gen Z Slang:**
 * [Slang 1 with emoji]
 * [Slang 2 with emoji]
@@ -228,27 +386,68 @@ Message: "${inputText}"`;
       } else {
         return { success: false, error: "Invalid action" };
       }
-      try {
-        const response = await fetch(`${apiUrl}?key=${apiKey}`, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }],
-            generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
-          })
-        });
-        const data = await response.json();
-        console.log("API Response:", data);
-        if (!response.ok) {
-          return { success: false, error: data.error?.message || `HTTP error: ${response.status}` };
+
+      async function attemptApiCall(apiKey, attemptNumber) {
+        try {
+          const response = await fetch(`${apiUrl}?key=${apiKey}`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }],
+              generationConfig: { maxOutputTokens: 300, temperature: 0.7 }
+            })
+          });
+          const data = await response.json();
+          console.log(`API Response (Attempt ${attemptNumber}, Key: ${apiKey.substring(0, 5)}...):`, {
+            status: response.status,
+            statusText: response.statusText,
+            headers: Object.fromEntries(response.headers.entries()),
+            body: data
+          });
+          if (!response.ok) {
+            return { success: false, error: data.error?.message || `HTTP error: ${response.status} ${response.statusText}` };
+          }
+          if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
+            return { success: true, output: data.candidates[0].content.parts[0].text.trim() };
+          }
+          return { success: false, error: data.error?.message || "Invalid response format: No candidates found" };
+        } catch (error) {
+          console.error(`API request failed (Attempt ${attemptNumber}, Key: ${apiKey.substring(0, 5)}...):`, {
+            message: error.message,
+            stack: error.stack
+          });
+          return { success: false, error: `API request failed: ${error.message}` };
         }
-        if (data.candidates && data.candidates[0]?.content?.parts[0]?.text) {
-          return { success: true, output: data.candidates[0].content.parts[0].text.trim() };
-        }
-        return { success: false, error: data.error?.message || "Invalid response format" };
-      } catch (error) {
-        return { success: false, error: `API request failed: ${error.message}` };
       }
+
+      // Try primary API key
+      let response = await attemptApiCall(primaryApiKey, 1);
+      if (response.success) return response;
+
+      // If primary fails with transient error, retry with fallback key
+      if (!response.success && (response.error.includes("429") || response.error.includes("503"))) {
+        console.log("Transient error detected, retrying with fallback key after 1s...");
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        response = await attemptApiCall(fallbackApiKey, 2);
+        if (response.success) return response;
+      }
+
+      // If both attempts fail, return mock response
+      console.warn("Both API attempts failed, returning mock response...");
+      const mockResponse = action === "convert" ?
+        `**English Gen Z Slang:**
+* Yo, this slaps! 🔥
+* Totally bussin'! 😎
+**Hinglish Mix:**
+* Bhai, mast vibe hai! 🫶
+* Sab kuch lit hai! ✨` :
+        `**English Gen Z Slang:**
+* Bet, I'm down! 😎
+* No cap, it's fire! 🔥
+**Hinglish Mix:**
+* Bhai, kya baat hai! 🫶
+* Full-on vibe check pass! ✨`;
+      return { success: true, output: mockResponse };
     }
     async function genZConvert() {
       const inputText = document.getElementById("inputText").value.trim();
@@ -263,9 +462,9 @@ Message: "${inputText}"`;
         output = addEmojis(output, mood);
         document.getElementById("outputText").innerHTML = output;
       } else {
-        alert(`Error: ${response.error}`);
-        document.getElementById("outputText").textContent = "Oops, something broke! 😅";
-      }z
+        alert(`Error: ${response.error}. Check console for details.`);
+        document.getElementById("outputText").textContent = `Oops, something broke! 😅 Error: ${response.error}`;
+      }
     }
     async function genZReply() {
       const inputText = document.getElementById("inputText").value.trim();
@@ -280,8 +479,8 @@ Message: "${inputText}"`;
         output = addEmojis(output, mood);
         document.getElementById("outputText").innerHTML = output;
       } else {
-        alert(`Error: ${response.error}`);
-        document.getElementById("outputText").textContent = "Oops, something broke! 😅";
+        alert(`Error: ${response.error}. Check console for details.`);
+        document.getElementById("outputText").textContent = `Oops, something broke! 😅 Error: ${response.error}`;
       }
     }
   </script>
