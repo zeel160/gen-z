@@ -36,6 +36,7 @@
       text-align: center;
       position: relative;
       transition: transform 0.3s ease;
+      animation: slideIn 0.8s ease-out forwards;
     }
     body.dark-mode .container {
       background: #2c2c2c;
@@ -60,15 +61,15 @@
     #themeButton {
       left: 10px;
     }
-    #emojiButton {
-      left: 70px;
-    }
     #themeButton:hover, #emojiButton:hover {
       transform: scale(1.1);
       color: #00d4ff;
       border-color: #00d4ff;
       background: linear-gradient(145deg, #e0256e, #cc1e5f);
       box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.5);
+    }
+    #themeButton:active, button:active, .copy-btn:active {
+      animation: bounce 0.3s ease;
     }
     body.dark-mode #themeButton, body.dark-mode #emojiButton {
       color: #fff;
@@ -109,6 +110,12 @@
       outline: none;
       box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2), inset -2px -2px 4px rgba(255, 255, 255, 0.5);
     }
+    textarea::placeholder {
+      color: #666;
+      animation: typing 4s steps(40, end) infinite;
+      overflow: hidden;
+      white-space: nowrap;
+    }
     body.dark-mode textarea {
       color: #e0e0e0;
       background: #2c2c2c;
@@ -116,6 +123,9 @@
     }
     body.dark-mode textarea:focus {
       box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.5), inset -2px -2px 4px rgba(255, 255, 255, 0.2);
+    }
+    body.dark-mode textarea::placeholder {
+      color: #aaa;
     }
     .buttons-bottom {
       display: flex;
@@ -164,6 +174,7 @@
       text-align: left;
       min-height: 100px;
       box-shadow: inset 4px 4px 8px rgba(0, 0, 0, 0.1), inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+      animation: pulse 1s ease-in-out;
     }
     body.dark-mode .output-section {
       background: #2c2c2c;
@@ -207,14 +218,48 @@
     body.dark-mode .word-of-day {
       color: #aaa;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    @keyframes slideIn {
+      from {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    @keyframes bounce {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(0.9);
+      }
+    }
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.02);
+      }
+    }
+    @keyframes typing {
+      0% {
+        width: 0;
+      }
+      50% {
+        width: 100%;
+      }
+      100% {
+        width: 0;
+      }
     }
     @media (max-width: 600px) {
       .container {
         padding: 60px 15px 15px 15px;
         border-radius: 12px;
+        animation: slideIn 0.6s ease-out forwards; /* Faster for mobile */
       }
       h1 {
         font-size: 20px;
@@ -222,16 +267,19 @@
       textarea {
         font-size: 14px;
       }
+      textarea::placeholder {
+        animation: typing 3s steps(30, end) infinite; /* Adjusted for mobile */
+      }
       button, .copy-btn {
         font-size: 14px;
         padding: 10px;
       }
-      #themeButton, #emojiButton {
+      #themeButton {
         font-size: 20px;
         padding: 6px;
       }
-      #emojiButton {
-        left: 55px;
+      .output-section {
+        animation: pulse 0.8s ease-in-out; /* Slightly faster pulse */
       }
     }
   </style>
@@ -239,7 +287,6 @@
 <body>
   <div class="container">
     <span id="themeButton" onclick="toggleTheme()" title="Toggle Theme">🌟</span>
-    <span id="emojiButton" onclick="toggleEmoji()" title="Toggle Emoji Enhancer">😎</span>
     <h1>💬 Gen Z Chat Translator 😎</h1>
     <div class="word-of-day" id="wordOfDay"></div>
     <textarea id="inputText" placeholder="Type in English or Hinglish (e.g., Bhai, kya scene hai?)..."></textarea>
@@ -256,7 +303,6 @@
   </div>
   <script>
     let isDarkMode = false;
-    let isEmojiEnabled = false;
     const loadingMessages = [
       "Load ho raha hai bhai! ⏳", "Chill maro, ban raha hai! 🔥",
       "Thodi der, vibe check chal raha! 😎", "Ruk ja, bussin’ output coming! 🫶",
@@ -289,10 +335,6 @@
     }
     function replaceSlang(text) {
       return text.replace(/\b(lit|slay|bet|yeet|fr fr|pop off|no cap|bussin|vibe|slaps)\b/gi, match => `<span title="${slangMap[match.toLowerCase()] || 'Slang meaning'}">${match}</span>`);
-    }
-    function addEmojis(text, mood) {
-      if (!isEmojiEnabled) return text;
-      return text + (mood === "Positive" ? " 🫶💅✨" : mood === "Negative" ? " 😩💀" : " 😎🔥");
     }
     function sanitizeHTML(str) {
       const div = document.createElement("div");
@@ -332,10 +374,6 @@
       isDarkMode = !isDarkMode;
       document.body.classList.toggle("dark-mode");
       document.getElementById("themeButton").textContent = isDarkMode ? "🌚" : "🌟";
-    }
-    function toggleEmoji() {
-      isEmojiEnabled = !isEmojiEnabled;
-      document.getElementById("emojiButton").textContent = isEmojiEnabled ? "🔥" : "😎";
     }
     function copyOutput() {
       const outputText = document.getElementById("outputText").textContent;
@@ -459,8 +497,8 @@ Message: "${inputText}"`;
         let output = formatApiResponse(response.output);
         const mood = inferMood(output);
         output = replaceSlang(output);
-        output = addEmojis(output, mood);
         document.getElementById("outputText").innerHTML = output;
+        document.getElementById("outputSection").style.animation = "pulse 1s ease-in-out"; // Re-trigger pulse
       } else {
         alert(`Error: ${response.error}. Check console for details.`);
         document.getElementById("outputText").textContent = `Oops, something broke! 😅 Error: ${response.error}`;
@@ -476,8 +514,8 @@ Message: "${inputText}"`;
         let output = formatApiResponse(response.output);
         const mood = inferMood(output);
         output = replaceSlang(output);
-        output = addEmojis(output, mood);
         document.getElementById("outputText").innerHTML = output;
+        document.getElementById("outputSection").style.animation = "pulse 1s ease-in-out"; // Re-trigger pulse
       } else {
         alert(`Error: ${response.error}. Check console for details.`);
         document.getElementById("outputText").textContent = `Oops, something broke! 😅 Error: ${response.error}`;
