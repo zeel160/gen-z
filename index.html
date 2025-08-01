@@ -406,35 +406,51 @@
       const primaryApiKey = "AIzaSyDMepOWMQbY8ms295OFCcp8XHQ8iFiB5f0";
       const fallbackApiKey = "sk-de4c1b8bd5804c248bca3b66e47b5e71";
       let prompt;
-      if (action === "convert") {
-        prompt = `Convert the following text to super trendy Gen Z slang for English (e.g., "vibe," "slaps," "no cap," "bussin") and mix Gen Z slang with Hindi phrases for Hinglish (e.g., "bhai, kya baat," "mast vibe"). Add emojis (e.g., 🔥, 😤, 🫶) to each item for extra Gen Z flair. Provide the output in this exact format:
+     if (action === "convert") {
+  prompt = `You are a Gen Z slang expert. Convert the following input text into:
+1. **Trendy English Gen Z slang** — use terms like "vibe," "slaps," "no cap," "bussin," "lit," etc., and add expressive emojis (🔥, 😤, 🫶, etc.).
+2. **Hinglish version** — mix Gen Z slang with Hindi phrases like "bhai, kya baat," "mast vibe," "full tandoor mein hai," etc., with fun emojis.
+
+⚠️ Format strictly like this:
 **English Gen Z Slang:**
-* [Slang 1 with emoji]
-* [Slang 2 with emoji]
-* [Slang 3 with emoji]
-* [Add more if relevant]
+* [Line 1 with emoji]
+* [Line 2 with emoji]
+* [Line 3 with emoji]
+* [Add more if needed]
+
 **Hinglish Mix:**
-* [Hinglish 1 with emoji]
-* [Hinglish 2 with emoji]
-* [Hinglish 3 with emoji]
-* [Add more if relevant]
-Do not include any additional paragraphs or explanations.
-Text: "${inputText}"`;
-      } else if (action === "reply") {
-        prompt = `Generate a super trendy Gen Z-style reply to the following message in English (e.g., "vibe," "slaps," "no cap," "bussin") and mix Gen Z slang with Hindi phrases for Hinglish (e.g., "bhai, kya baat," "mast vibe"). Match the sentiment (positive, negative, neutral), keep it short and trendy, and add emojis (e.g., 🔥, 😤, 🫶) to each item for extra Gen Z flair. Provide the output in this exact format:
+* [Line 1 with emoji]
+* [Line 2 with emoji]
+* [Line 3 with emoji]
+* [Add more if needed]
+
+🛑 Do not explain or add extra text outside the format. Be punchy and trendy.
+Text to convert: "${inputText}"`;
+}
+else if (action === "reply") {
+  prompt = `You are a Gen Z chat expert. Write short, trendy replies to the following message in both:
+1. **English Gen Z Slang** — use language like "that slaps," "lowkey fire," "mood," etc., with 🔥, 🫶, 😤, 💀 emojis.
+2. **Hinglish Gen Z Slang** — combine Hindi phrases and Gen Z tone like "bhai, kya scene hai," "full vibe on," etc., with matching emojis.
+
+🎯 Match the sentiment of the original message (positive, negative, neutral). Keep responses short and fun.
+
+Format the reply like this:
 **English Gen Z Slang:**
 * [Reply 1 with emoji]
 * [Reply 2 with emoji]
 * [Reply 3 with emoji]
-* [Add more if relevant]
+* [Add more if needed]
+
 **Hinglish Mix:**
-* [Hinglish Reply 1 with emoji]
-* [Hinglish Reply 2 with emoji]
-* [Hinglish Reply 3 with emoji]
-* [Add more if relevant]
-Do not include any additional paragraphs or explanations.
+* [Reply 1 with emoji]
+* [Reply 2 with emoji]
+* [Reply 3 with emoji]
+* [Add more if needed]
+
+🚫 No extra paragraphs or notes.
 Message: "${inputText}"`;
-      } else {
+}
+else {
         return { success: false, error: "Invalid action" };
       }
 
