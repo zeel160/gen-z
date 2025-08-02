@@ -317,28 +317,111 @@
   <script>
     let isDarkMode = false;
     const loadingMessages = [
-      "Load ho raha hai bhai! ⏳", "Chill maro, ban raha hai! 🔥",
-      "Thodi der, vibe check chal raha! 😎", "Ruk ja, bussin’ output coming! 🫶",
-      "Bhai, sab lit hai, loading! ✨"
+     
+  "Load ho raha hai bhai! ⏳",
+  "Chill maro, ban raha hai! 🔥",
+  "Thodi der, vibe check chal raha! 😎",
+  "Ruk ja, bussin’ output coming! 🫶",
+  "Bhai, sab lit hai, loading! ✨",
+  "Thoda patience, drip tayyar ho raha! 💅",
+  "Scene tight ho raha hai, ruk ja zara! 🎬",
+  "Bas aa hi gaya... no cap! 🫡",
+  "Output aa raha, sab chill hai! 🌈",
+  "System ne bola: 'hold up, I’m slayin’ it' 😤",
+  "Server vibe pe hai, aa raha data 💽",
+  "Mood set ho raha hai... slaps incoming 🎧",
+  "Locha mat karo, magic ho raha hai ✨",
+  "Lowkey loading, highkey fire hoga! 🔥",
+  "Yeet mode on — output jaise rocket 🚀",
+  "Code ke emotions process ho rahe hain 😭💻",
+  "AI bhi thoda dance kar raha pehle 🕺",
+  "Sab kuch snatched ban raha hai, wait kar 👑",
+  "Processing like a main character 🌟",
+  "Bas final touch up de raha — slay ho gaya 💁‍♀️"
+
+
     ];
     const genZWords = [
-      { word: "Slay", meaning: "To do something amazingly well" },
-      { word: "Lit", meaning: "Really fun, exciting, or amazing" },
-      { word: "Bet", meaning: "Agreed or confirmed" },
-      { word: "Yeet", meaning: "To throw or express excitement" }
-    ];
+      
+  { word: "Lit", meaning: "Really fun, exciting, or amazing" },
+  { word: "Slay", meaning: "To do something amazingly well" },
+  { word: "Bet", meaning: "Agreed or confirmed" },
+  { word: "Yeet", meaning: "To throw or express excitement" },
+  { word: "Fr fr", meaning: "For real, for real (truthfully)" },
+  { word: "Pop off", meaning: "To go all out or succeed" },
+  { word: "No cap", meaning: "Honestly, no lie" },
+  { word: "Bussin", meaning: "Really good or awesome" },
+  { word: "Vibe", meaning: "Mood or atmosphere" },
+  { word: "Slaps", meaning: "Really good (like music or food)" },
+  { word: "Lowkey", meaning: "Slightly, secretly, or subtly" },
+  { word: "Highkey", meaning: "Openly or obviously" },
+  { word: "Flex", meaning: "To show off or brag" },
+  { word: "Sus", meaning: "Suspicious or shady" },
+  { word: "Go off", meaning: "To succeed or express strongly" },
+  { word: "Mood", meaning: "A relatable feeling or vibe" },
+  { word: "Deadass", meaning: "Seriously; no joke" },
+  { word: "Pressed", meaning: "Annoyed or overly upset" },
+  { word: "Finna", meaning: "Going to (short for 'fixing to')" },
+  { word: "Catch these hands", meaning: "Threatening a fight (joking or serious)" },
+  { word: "Periodt", meaning: "Used for emphasis with finality" },
+  { word: "Simp", meaning: "Someone doing too much for someone they like" },
+  { word: "Snatched", meaning: "Looking great or stylish" },
+  { word: "Glow up", meaning: "Big positive transformation" },
+  { word: "Main character", meaning: "Acting like the center of attention" },
+  { word: "Shook", meaning: "Very surprised or affected" },
+  { word: "I'm weak", meaning: "That’s hilarious (laughing hard)" },
+  { word: "It's giving", meaning: "It resembles / feels like" },
+  { word: "L", meaning: "Loss or fail" },
+  { word: "W", meaning: "Win or success" },
+  { word: "Ratioed", meaning: "When a reply outperforms the original post" },
+  { word: "Boujee", meaning: "Fancy or high-class (sometimes sarcastic)" },
+  { word: "Drip", meaning: "Stylish outfit or look" },
+  { word: "Ate", meaning: "Did an amazing job" },
+  { word: "Stan", meaning: "Obsessed fan or support strongly" },
+  { word: "Bruh moment", meaning: "Dumb, awkward, or unbelievable moment" },
+  { word: "Cancelled", meaning: "No longer supported or socially rejected" },
+  { word: "Vibe check", meaning: "Testing someone’s mood or energy" }]
+
     const slangMap = {
-      "lit": "Really fun, exciting, or amazing",
-      "slay": "To do something amazingly well",
-      "bet": "Agreed or confirmed",
-      "yeet": "To throw or express excitement",
-      "fr fr": "For real, for real (truthfully)",
-      "pop off": "To go all out or succeed",
-      "no cap": "Honestly, no lie",
-      "bussin": "Really good or awesome",
-      "vibe": "Mood or atmosphere",
-      "slaps": "Really good (like music or food)"
-    };
+  "lit": "Really fun, exciting, or amazing",
+  "slay": "To do something amazingly well",
+  "bet": "Agreed or confirmed",
+  "yeet": "To throw or express excitement",
+  "fr fr": "For real, for real (truthfully)",
+  "pop off": "To go all out or succeed",
+  "no cap": "Honestly, no lie",
+  "bussin": "Really good or awesome",
+  "vibe": "Mood or atmosphere",
+  "slaps": "Really good (like music or food)",
+  "lowkey": "Slightly, secretly, or subtly",
+  "highkey": "Openly or obviously",
+  "flex": "To show off or brag",
+  "sus": "Suspicious or shady",
+  "go off": "To succeed or express strongly",
+  "mood": "A relatable feeling or vibe",
+  "deadass": "Seriously; no joke",
+  "pressed": "Annoyed or overly upset",
+  "finna": "Going to (short for 'fixing to')",
+  "catch these hands": "Threatening a fight (joking or serious)",
+  "periodt": "Used for emphasis with finality",
+  "simp": "Someone doing too much for someone they like",
+  "snatched": "Looking great or stylish",
+  "glow up": "Big positive transformation",
+  "main character": "Acting like the center of attention",
+  "shook": "Very surprised or affected",
+  "I’m weak": "That’s hilarious (laughing hard)",
+  "it's giving": "It resembles / feels like",
+  "L": "Loss or fail",
+  "W": "Win or success",
+  "ratioed": "When a reply outperforms the original post",
+  "boujee": "Fancy or high-class (sometimes sarcastic)",
+  "drip": "Stylish outfit or look",
+  "ate": "Did an amazing job",
+  "stan": "Obsessed fan or support strongly",
+  "bruh moment": "Dumb, awkward, or unbelievable moment",
+  "cancelled": "No longer supported or socially rejected",
+  "vibe check": "Testing someone’s mood or energy"
+};
 
     function getRandomLoadingMessage() { return loadingMessages[Math.floor(Math.random() * loadingMessages.length)]; }
     function getRandomWordOfDay() { return genZWords[Math.floor(Math.random() * genZWords.length)]; }
@@ -407,10 +490,13 @@
       const fallbackApiKey = "sk-de4c1b8bd5804c248bca3b66e47b5e71";
       let prompt;
      if (action === "convert") {
-  prompt = `You are a Gen Z slang expert. Convert the following input text into:
-1. **Trendy English Gen Z slang** — use terms like "vibe," "slaps," "no cap," "bussin," "lit," etc., and add expressive emojis (🔥, 😤, 🫶, etc.).
-2. **Hinglish version** — mix Gen Z slang with Hindi phrases like "bhai, kya baat," "mast vibe," "full tandoor mein hai," etc., with fun emojis.
+  prompt = `You are a Gen Z slang expert. Take the plain, formal, or boring text below and convert it into two cool, trendy Gen Z versions:
 
+1. **English Gen Z Slang** — Rewrite using expressive Gen Z phrases like “vibe,” “bussin,” “lowkey,” “slaps,” “no cap,” “mood,” etc. Add fun, relevant emojis like 🔥, 💀, 😤, 🫶, 😎. Make it sound casual, confident, and fun — like something a Gen Z person would text or post.
+
+2. **Hinglish Gen Z Slang** — Rewrite in a Hindi-English mix using phrases like “bhai kya scene,” “full vibe on,” “tandoor mein hai mood,” “sach bolun toh scene tight hai,” etc. Include matching emojis to enhance the feel 🤌, 😂, 😤, 🫠, etc.
+
+🎯 Goal: Make the original boring sentence sound cool, vibey, and Gen Z-approved in both English and Hinglish.
 ⚠️ Format strictly like this:
 **English Gen Z Slang:**
 * [Line 1 with emoji]
@@ -428,11 +514,16 @@
 Text to convert: "${inputText}"`;
 }
 else if (action === "reply") {
-  prompt = `You are a Gen Z chat expert. Write short, trendy replies to the following message in both:
-1. **English Gen Z Slang** — use language like "that slaps," "lowkey fire," "mood," etc., with 🔥, 🫶, 😤, 💀 emojis.
-2. **Hinglish Gen Z Slang** — combine Hindi phrases and Gen Z tone like "bhai, kya scene hai," "full vibe on," etc., with matching emojis.
+  prompt = `You are a Gen Z chat expert. Based on the message below, generate short, trendy replies in two styles:
 
-🎯 Match the sentiment of the original message (positive, negative, neutral). Keep responses short and fun.
+1. **English Gen Z Slang** — Use casual, expressive Gen Z phrases like “that slaps,” “lowkey fire,” “mood,” “deadass,” etc. Add fitting emojis like 🔥, 💀, 🫶, 😤, 🙌.
+
+2. **Hinglish Gen Z Slang** — Blend Gen Z-style Hindi-English (e.g., “bhai, kya scene hai,” “full tandoor mein hai,” “scene tight hai,” “mujhe lag raha hai vibe aa rahi hai”) with expressive emojis.
+
+🎯 Important Instructions:
+- Match the **tone/sentiment** of the original message (positive, negative, or neutral).
+- Keep replies **short, fun, and realistic**, as if texting in a group chat or DMs.
+- Do **not** explain or repeat the message. Just reply in the two requested formats..
 
 Format the reply like this:
 **English Gen Z Slang:**
